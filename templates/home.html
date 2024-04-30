@@ -8,51 +8,52 @@
 </head>
 <body>
 
+
 <div class="card" style="width: 50%;">
   <div class="card-body">
-
-
-   <div class="row">
-    <div class="col">
-      Column
-    </div>
-    <div class="col">
-      Column
-    </div>
-    <div class="col">
-      Column
-    </div>
-  </div>
-       <div class="row">
-    <div class="col">
-      Column
-    </div>
-  </div> <div class="row">
-    <div class="col">
-      Column
-    </div>
-    <div class="col">
-      Column
-    </div>
-    <div class="col">
-      Column
-    </div>
-      <div class="col">
-      Column
-    </div>
-    <div class="col">
-      Column
-    </div>
-    <div class="col">
-      Column
-    </div>
-  </div>
-
-
+      <div class="row">
+        <div class="col">
+          1 of 2
+        </div>
+        <div class="col-6">
+          2 of 2 (wider)
+        </div>
+      </div>
   </div>
 </div>
 
+<div class="card" style="width: 50%;">
+  <div class="card-body">
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="#">Temperature</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Precipitation</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Wind</a>
+  </li>
+</ul>
+  </div>
+</div>
 
+<div class="card" style="width: 50%;">
+  <div class="card-body">
+ <div class="row">
+            {%  for forecast in forecast_data %}
+                    <div class="col">
+                     Monday
+                    <br>
+                    <img src="{{ forecast_data[0]['icon'] }}">
+                    <br>
+                    {{ forecast_data[0]["temp"] }}
+                    </div>
+            {%  endfor %}
+
+      </div>
+  </div>
+</div>
 
 
 
