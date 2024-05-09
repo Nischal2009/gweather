@@ -43,11 +43,13 @@
  <div class="row">
             {%  for forecast in forecast_data %}
                     <div class="col">
-                     Monday
+                     {{ forecast["day_of_week"] }}
                     <br>
-                    <img src="{{ forecast_data[0]['icon'] }}">
+                    <img src="{{ forecast['icon'] }}">
                     <br>
-                    {{ forecast_data[0]["temp"] }}
+                    {{ forecast["temp"] }}
+                    <br>
+                    {{ forecast["description"] }}
                     </div>
             {%  endfor %}
 
@@ -55,7 +57,7 @@
   </div>
 </div>
 
-
+{{ forcast_data }}
 
 </body>
 </html>
