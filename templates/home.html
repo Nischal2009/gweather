@@ -5,6 +5,7 @@
     <title>Title</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
@@ -22,20 +23,24 @@
   </div>
 </div>
 
-<div class="card" style="width: 50%;">
-  <div class="card-body">
-<ul class="nav nav-tabs">
-  <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="#">Temperature</a>
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
   </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Precipitation</a>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Profile</button>
   </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Wind</a>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="messages-tab" data-bs-toggle="tab" data-bs-target="#messages" type="button" role="tab" aria-controls="messages" aria-selected="false">Messages</button>
   </li>
+
 </ul>
-  </div>
+
+<!-- Tab panes -->
+<div class="tab-content">
+  <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab" tabindex="0">1</div>
+  <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">2</div>
+  <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab" tabindex="0">3</div>
 </div>
 
 <div class="card" style="width: 50%;">
@@ -57,7 +62,50 @@
   </div>
 </div>
 
-{{ forcast_data }}
+
+
+
+
+
+
+
+
+
+
+<div>
+  <canvas id="myChart"></canvas>
+</div>
+
+
+
+{{ days }}
+
+
+
+
+<script>
+  const ctx = document.getElementById('myChart').getContext('2d');
+
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: {{ days|tojson }},
+      datasets: [{
+        label: 'Temperature Data',
+        data: {{ data|tojson }},
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+
 
 </body>
 </html>

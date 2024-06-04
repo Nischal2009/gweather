@@ -7,8 +7,6 @@ app = Flask(__name__)
 
 # Define route for the home page
 @app.route('/')
-
-
 def home():
     # API key for accessing OpenWeatherMap API
     api_key = "4ccc7cabc4bac53437084c5a6f2e1781"
@@ -25,6 +23,7 @@ def home():
     forecast_list = data['list']
     index = 0
     forecast_data = []
+    days = []
     # Iterate through forecast list
     while index < len(forecast_list):
         # Extract relevant data for each forecast
@@ -41,6 +40,9 @@ def home():
         # You can also get the day name
         day_name = date_object.strftime('%A')
         print(day_name)
+        days.append(day_name)
+
+
 
         index +=8
 
@@ -55,16 +57,20 @@ def home():
         # Append forecast data to list
         forecast_data.append(thisdict)
     print(forecast_data)
+    print(days)
+
+
+
+    data = [23, 25, 18, 28, 16]
 
     # Render HTML template with forecast data
-    return render_template('home.html',forecast_data=forecast_data)
+    return render_template('home.html',forecast_data=forecast_data, days=days, data=data)
 
-# def get_day_of_week(dt_txt):
-#     date_object = datetime.strptime(dt_txt, '%Y-%m-%d %H:%M:%S')
-#     day_of_week = date_object.weekday()
-#     day_name = date_object.strftime('%A')
-#     return day_name
 
+
+@app.route('/test')
+def test():
+    return render_template('test.html')
 
 
 if __name__ == '__main__':
